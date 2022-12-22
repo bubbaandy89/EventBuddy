@@ -1,4 +1,4 @@
 *.pyc*
-Lib/*
+eventproject/Lib/*
 __pycache__
 db.sqlite3

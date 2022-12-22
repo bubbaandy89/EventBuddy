@@ -1,43 +1,15 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Explore</title>
+{% block title %}Explore Events{% endblock %}
+{% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'ebexplore_style.css'%}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <div class="topmenu">
-        <div class="left_section">
-            <p class="maintitle">EventBuddy</p>
-        </div> 
-        <div class="right_section">
-            {% if uid == ''%}
-            <a href="/signin" class="menulink" title="Sign in to your account">Sign In</a>
-            {% endif %}
-            {% if uid != ''%}
-            <a href="{% url 'viewprofile' uid%}" class="menulink" title="Profile">Profile</a>
-            {% endif %}
-            <a href="#" class="menulink" title="About Us">About Us</a>
-            {% if uid != ''%}
-            <a href="{% url 'explore' uid%}" class="active" title="Explore trending events">Explore</a>
-            {% endif %}
-            {% if uid == ''%}
-            <a href="/explore" class="active" title="Explore trending events">Explore</a>
-            {% endif %}
-            {% if uid == ''%}
-            <a href="/" class="menulink" title="Home">Home</a>
-            {% endif %}
-            {% if uid != ''%}
-            <a href="{% url 'home' uid%}" class="menulink" title="Home">Home</a>
-            {% endif %}
-        </div>
-    </div>
+{% endblock %}
+{% block content %}
     <div class="eventsection">
         {% for event in explst%}    
         <div>
@@ -53,5 +25,4 @@
         </div>
         {% endfor %}
     </div>    
-</body>
-</html>
+{% endblock %}

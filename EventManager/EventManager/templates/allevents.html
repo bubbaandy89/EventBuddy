@@ -1,14 +1,13 @@
+{% extends "blog/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{uname}}'s Events</title>
+    {% block title %}{{uname}}'s Events{% endblock %}
+    {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{% static 'eballevents_style.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
 </head>
 <body>
     <div class="topmenu">
@@ -16,25 +15,9 @@
             <p class="maintitle">EventBuddy</p>
         </div> 
         <div class="right_section">
-            {% if uid == ''%}
-            <a href="/signin" class="menulink" title="Sign in to your account">Sign In</a>
-            {% endif %}
-            {% if uid != ''%}
-            <a href="#" class="menulink" title="Profile">Profile</a>
-            {% endif %}
-            <a href="#" class="menulink" title="About Us">About Us</a>
-            {% if uid != ''%}
-            <a href="{% url 'explore' uid%}" class="menulink" title="Explore trending events">Explore</a>
-            {% endif %}
-            {% if uid == ''%}
+            <a href="{% url 'event_manager_home:explore' uid%}" class="menulink" title="Explore trending events">Explore</a>
             <a href="/explore" class="menulink" title="Explore trending events">Explore</a>
-            {% endif %}
-            {% if uid == ''%}
-            <a href="/" class="menulink" title="Home">Home</a>
-            {% endif %}
-            {% if uid != ''%}
-            <a href="{% url 'home' uid%}" class="menulink" title="Home">Home</a>
-            {% endif %}
+            <a href="/" class="menulink" title="Events Home">Events Home</a>
         </div>
     </div>
     <h1 class="mainhead">All Events</h1>
@@ -48,8 +31,8 @@
         <h2 class="field2">DEADLINE: {{event.registration_deadline}}</h2>
         <h1 class="field1"><a href="{{event.event_poster}}" title="View poster for this event" class="vplink">View Poster</a></h1>
         {% if event.host_email == umail%}
-        <h1 class="field1"><a href="{% url 'viewparticipant' uid event.event_id%}" class="vplink" title="View all participants for this event">View Participants</a></h1>
-        <h1 class="field1"><a href="{% url 'deleteevent' uid event.event_id%}" class="dellink">Delete</a></h1>
+        <h1 class="field1"><a href="{% url 'event_manager_home:viewparticipant' uid event.event_id%}" class="vplink" title="View all participants for this event">View Participants</a></h1>
+        <h1 class="field1"><a href="{% url 'event_manager_home:deleteevent' uid event.event_id%}" class="dellink">Delete</a></h1>
         {% endif %}
         </div>
         {% endfor %}
